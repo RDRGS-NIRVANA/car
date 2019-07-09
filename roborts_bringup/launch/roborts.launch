@@ -1,7 +1,7 @@
 <launch>
   <master auto="start"/>
   <!-- <arg name="map" value="214"/> -->
-  <arg name="map" value="parking_lot"/>
+  <arg name="map" value="test"/>
 
   <!--Load parameters for localization node  -->
   <rosparam command="load" file="$(find roborts_localization)/config/localization.yaml" />
@@ -32,8 +32,9 @@
 
   <node pkg="roborts_decision" type="behavior_test_node" name="behavior_test_node" respawn="false" />
 
+
   <!-- Run the rviz -->
-  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find roborts_bringup)/rviz/rsoborts.rviz" /> -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find roborts_bringup)/rviz/roborts.rviz" />
 
 </launch>
 
