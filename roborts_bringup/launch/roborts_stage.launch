@@ -1,5 +1,5 @@
 <launch>
-  <arg name="map" value="parking_lot"/>
+  <arg name="map" value="icra2018"/>
   <master auto="start"/>
   <param name="/use_sim_time" value="true"/>
 
@@ -28,6 +28,8 @@
    <!-- Run the velocity converter node -->
   <node pkg="roborts_planning" type="vel_converter" name="vel_converter_node" respawn="false" />
 
+  <node pkg="roborts_decision" type="behavior_test_node" name="behavior_test_node" respawn="false" />  
+  
   <!-- Run the rviz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find roborts_bringup)/rviz/roborts.rviz" />
 
