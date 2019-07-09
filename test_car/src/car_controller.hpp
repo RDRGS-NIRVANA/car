@@ -26,7 +26,7 @@ class L1Controller
         tf::TransformListener tf_listener;
 
         visualization_msgs::Marker points, line_strip, goal_circle;
-        roborts_msgs::TwistAccel cmd_vel;
+        geometry_msgs::Twist cmd_vel;
         geometry_msgs::Point odom_goal_pos;
         nav_msgs::Odometry odom;
         nav_msgs::Path map_path, odom_path;

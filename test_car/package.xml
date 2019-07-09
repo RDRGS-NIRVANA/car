@@ -18,13 +18,11 @@
   <build_depend>visualization_msgs</build_depend>
   <build_depend>tf</build_depend> 
   <build_depend>sensor_msgs</build_depend>
-  <build_depend>roborts_msgs</build_depend>
   <build_depend>python-serial</build_depend>
   <build_depend>dynamic_reconfigure</build_depend>
 
 
   <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>roborts_msgs</exec_depend>
   <exec_depend>move_base</exec_depend>
   <exec_depend>joy</exec_depend>
   <exec_depend>roscpp</exec_depend>
