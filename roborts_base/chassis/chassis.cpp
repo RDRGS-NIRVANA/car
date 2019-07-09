@@ -45,8 +45,8 @@ void Chassis::ROS_Init()
   // ros_odom_pub_ = ros_nh_.advertise<nav_msgs::Odometry>("odom", 30);
   ros_imu_pub_ = ros_nh_.advertise<sensor_msgs::Imu>("/imu_data", 1);
   //ros subscriber
-  ros_sub_cmd_chassis_vel_ = ros_nh_.subscribe("cmd_vel", 1, &Chassis::ChassisSpeedCtrlCallback, this);
-  ros_sub_cmd_chassis_vel_acc_ = ros_nh_.subscribe("car/cmd_vel", 1, &Chassis::ChassisSpeedAccCtrlCallback, this);
+  ros_sub_cmd_chassis_vel_ = ros_nh_.subscribe("/car/cmd_vel", 1, &Chassis::ChassisSpeedCtrlCallback, this);
+  ros_sub_cmd_chassis_vel_acc_ = ros_nh_.subscribe("cmd_vel_acc", 1, &Chassis::ChassisSpeedAccCtrlCallback, this);
 
   //ros_message_init
   // imu_data_.header.frame_id = "IMU_link";
@@ -81,15 +81,13 @@ void Chassis::ImuInfoCallback(const std::shared_ptr<roborts_sdk::cmd_imu_data> i
   // imu_data_.linear_acceleration.y = imu_info->ay * 9.81 / 1000;
   // imu_data_.linear_acceleration.z = imu_info->az * 9.81 / 1000;
   // ros_imu_pub_.publish(imu_data_);
-
-  
 }
 
 void Chassis::ChassisSpeedCtrlCallback(const geometry_msgs::Twist::ConstPtr &vel)
 {
   roborts_sdk::cmd_chassis_speed chassis_speed;
-  chassis_speed.vx = vel->linear.x * 1000;
-  chassis_speed.vy = vel->linear.y * 1000;
+  chassis_speed.vx = vel->linear.x;
+  chassis_speed.vy = 0.0;
   chassis_speed.vw = vel->angular.z;
   chassis_speed.rotate_x_offset = 0;
   chassis_speed.rotate_y_offset = 0;
@@ -104,7 +102,7 @@ void Chassis::ChassisSpeedAccCtrlCallback(const roborts_msgs::TwistAccel::ConstP
   chassis_spd_acc.vw = vel_acc->twist.angular.z * 1000;
   chassis_spd_acc.ax = vel_acc->accel.linear.x * 1000;
   chassis_spd_acc.ay = 0.0;
-  chassis_spd_acc.wz = vel_acc->accel.angular.z* 1000;
+  chassis_spd_acc.wz = vel_acc->accel.angular.z * 1000;
   chassis_spd_acc.rotate_x_offset = 0;
   chassis_spd_acc.rotate_y_offset = 0;
   chassis_spd_acc_pub_->Publish(chassis_spd_acc);
